@@ -25,9 +25,8 @@ public class BaseTest {
 
     @BeforeMethod
     public void loadApplication(){
-        basePage = new BasePage();
-        loginPage = new LoginPage();
-        basePage.setDriver(driver);
+        basePage = new BasePage(driver);
+        loginPage = new LoginPage(driver);
     }
 
 

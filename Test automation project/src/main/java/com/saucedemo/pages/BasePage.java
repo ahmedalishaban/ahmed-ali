@@ -10,10 +10,12 @@ import java.time.Duration;
 
 public class BasePage {
 
-    private static WebDriver driver;
+    protected WebDriver driver;
+    protected WebDriverWait wait;
 
-    public void setDriver(WebDriver driver){
-        BasePage.driver = driver;
+    public BasePage(WebDriver driver) {
+        this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     protected void openPage(String pageURL){
@@ -39,19 +41,17 @@ public class BasePage {
     }
 
     public String getText(By locator){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        String text =  wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).getText();
+        String text =  waitForElement(locator).getText();
         System.out.println("Current Text: " + text);
         return text;
     }
 
-    public String getColor(By locator){
+    public String getElemColor(By locator){
+        return waitForElement(locator).getCssValue("background-color");
+    }
 
-        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
-
-        return wait.until(ExpectedConditions
-                        .visibilityOfElementLocated(locator))
-                .getCssValue("background-color");
+    protected WebElement waitForElement(By locator) {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
 }
