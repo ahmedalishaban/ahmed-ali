@@ -1,4 +1,4 @@
-package com.instabug.tests;
+package com.saucedemo.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

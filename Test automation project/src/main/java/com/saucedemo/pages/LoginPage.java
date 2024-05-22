@@ -1,7 +1,6 @@
-package com.instabug.pages;
+package com.saucedemo.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends BasePage {
 
