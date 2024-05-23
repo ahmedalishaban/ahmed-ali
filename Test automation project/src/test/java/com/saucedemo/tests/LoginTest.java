@@ -1,11 +1,36 @@
 package com.saucedemo.tests;
 
+import com.saucedemo.pages.LoginPage;
+import com.saucedemo.pages.Utilities;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
-public class LoginTest extends BaseTest {
+import java.io.File;
+import java.io.IOException;
+import java.time.Duration;
 
+public class LoginTest {
+    private WebDriver driver;
+    private LoginPage loginPage;
+    @BeforeClass
+    public void setUp(){
+        driver = new EdgeDriver();
+        driver.manage().window().maximize();
+    }
+
+    @BeforeMethod
+    public void loadApplication(){
+        loginPage = new LoginPage(driver,
+                new WebDriverWait(driver, Duration.ofSeconds(10)));
+    }
 
     @Test(priority = 1)
     public void verifyValidUsernameAndPassword(){
@@ -14,7 +39,7 @@ public class LoginTest extends BaseTest {
         loginPage.setPassword("secret_sauce");
         loginPage.clickLoginBTN();
 
-            Assert.assertEquals(basePage.getURL(),
+            Assert.assertEquals(Utilities.getURL(driver),
                     "https://www.saucedemo.com/inventory.html",
                     "You have logged in successfully");
     }
@@ -65,11 +90,27 @@ public class LoginTest extends BaseTest {
 
     }
 
+    @AfterMethod
+    public void takeFailedScreenShots(ITestResult testResult){
+        if (ITestResult.FAILURE == testResult.getStatus()) {
+            TakesScreenshot screenshot = (TakesScreenshot) driver;
+            File source = screenshot.getScreenshotAs(OutputType.FILE);
+            File destination = new File(System.getProperty("user.dir") +
+                    "\\src\\main\\resources\\screenshots\\" + testResult.getName() + ".png");
+            try {
+                FileHandler.copy(source,destination);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
     private void assertErrorMsg(String expectedMsg){
 
         SoftAssert softAssert = new SoftAssert();
 
-        Assert.assertEquals(basePage.getURL(),
+        Assert.assertEquals(Utilities.getURL(driver),
                 "https://www.saucedemo.com/",
                 "You are prevented to login");
 
@@ -84,4 +125,9 @@ public class LoginTest extends BaseTest {
         softAssert.assertAll();
     }
 
+
+    @AfterClass
+    public void tearDown(){
+        driver.quit();
+    }
 }
