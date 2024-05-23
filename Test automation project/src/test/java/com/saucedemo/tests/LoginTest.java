@@ -20,6 +20,7 @@ import java.time.Duration;
 public class LoginTest {
     private WebDriver driver;
     private LoginPage loginPage;
+
     @BeforeClass
     public void setUp(){
         driver = new EdgeDriver();

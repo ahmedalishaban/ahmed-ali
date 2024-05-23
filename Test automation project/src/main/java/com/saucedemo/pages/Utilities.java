@@ -13,7 +13,7 @@ public class Utilities {
         driver.navigate().to(pageURL);
     }
 
-    public WebElement find(WebDriver driver, By locator){
+    public static WebElement find(WebDriver driver, By locator){
         return driver.findElement(locator);
     }
 
