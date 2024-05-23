@@ -41,6 +41,7 @@ public class BasePage {
     }
 
     public String getText(By locator){
+
         String text =  waitForElement(locator).getText();
         System.out.println("Current Text: " + text);
         return text;

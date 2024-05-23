@@ -21,15 +21,9 @@ public class LoginPage extends BasePage {
         openPage(loginPage);
     }
 
-    public void setUsername(String username){
-        setText(usernameElem,
-                username);
-    }
+    public void setUsername(String username){setText(usernameElem, username);}
 
-    public void setPassword(String password){
-        setText(passwordElem,
-                password);
-    }
+    public void setPassword(String password){setText(passwordElem, password);}
 
     public void clickLoginBTN(){
         click(loginBtn);

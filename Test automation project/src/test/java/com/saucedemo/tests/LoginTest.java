@@ -26,7 +26,8 @@ public class LoginTest extends BaseTest {
         loginPage.setUsername("standard_user");
         loginPage.setPassword("ahmedali123");
         loginPage.clickLoginBTN();
-        assertErrorMsg("Epic sadface: Username and password do not match any user in this service");
+
+            assertErrorMsg("Epic sadface: Username and password do not match any user in this service");
 
     }
 
@@ -37,7 +38,7 @@ public class LoginTest extends BaseTest {
         loginPage.setUsername("ahmedali123");
         loginPage.setPassword("secret_sauce");
         loginPage.clickLoginBTN();
-        assertErrorMsg("Epic sadface: Username and password do not match any user in this service");
+            assertErrorMsg("Epic sadface: Username and password do not match any user in this service");
 
     }
 
@@ -48,7 +49,7 @@ public class LoginTest extends BaseTest {
         loginPage.setUsername("ahmedali123");
         loginPage.setPassword("ahmedali123");
         loginPage.clickLoginBTN();
-        assertErrorMsg("Epic sadface: Username and password do not match any user in this service");
+            assertErrorMsg("Epic sadface: Username and password do not match any user in this service");
 
 
     }
@@ -60,7 +61,7 @@ public class LoginTest extends BaseTest {
         loginPage.setUsername("");
         loginPage.setPassword("");
         loginPage.clickLoginBTN();
-        assertErrorMsg("Epic sadface: Username is required");
+            assertErrorMsg("Epic sadface: Username is required");
 
     }
 
